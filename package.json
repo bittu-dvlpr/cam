@@ -1,6 +1,6 @@
 {
   "name": "@developerb2/cam",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI app that generate API module boilerplate",
   "author": "Bittu Patel",
   "license": "MIT",
