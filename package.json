@@ -1,6 +1,6 @@
 {
   "name": "@developerb2/cam",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A CLI app that generate API module boilerplate",
   "author": "Bittu Patel",
   "license": "MIT",
@@ -17,6 +17,7 @@
     "cam": "bin/cam"
   },
   "dependencies": {
+    "delay": "^4.3.0",
     "execa": "^4.0.1",
     "listr": "^0.14.3",
     "yargs": "^15.3.1"

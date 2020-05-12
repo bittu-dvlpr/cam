@@ -3,7 +3,7 @@ Author: Bittu Patel (b2@skaratechnologies.com)
 cli.js (c) 2020
 Desc: command line tool to generate API module boilerplate
 Created:  5/11/2020, 11:22:56 PM
-Modified: 5/12/2020, 11:30:53 PM
+Modified: 5/13/2020, 12:21:07 AM
 */
 
 const argv = require('yargs')
@@ -20,6 +20,7 @@ const fs = require('fs');
 const execa = require('execa');
 const Listr = require('listr');
 const { Observable } = require('rxjs');
+const delay = require('delay');
 
 var workingDir = path.basename(process.cwd() + '/src');
 var dir = path.join(workingDir, `api/${argv.g}`);
@@ -100,6 +101,18 @@ const tasks = new Listr([
                 observer.complete();
               }, 5000);
             }),
+        },
+        {
+          title: 'Generate boilerplate',
+          task: async () => {
+            if (fs.existsSync(`${dir}/${files[0]}`)) {
+              const code = require('./templates/routes')(argv.g);
+              await delay(2000);
+              fs.writeFile(`${dir}/${files[0]}`, code, (err) => {
+                if (err) throw new Error(err);
+              });
+            }
+          },
         },
       ]);
     },
