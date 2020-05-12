@@ -1,13 +1,13 @@
 {
   "name": "@developerb2/cam",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "description": "A CLI app that generate API module boilerplate",
   "author": "Bittu Patel",
   "license": "MIT",
   "homepage": "https://github.com/bittu-dvlpr/cam#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bittu-dvlpr/cma.git"
+    "url": "git+https://github.com/bittu-dvlpr/cam.git"
   },
   "engines": {
     "node": ">=8"

@@ -3,7 +3,7 @@ Author: Bittu Patel (b2@skaratechnologies.com)
 cli.js (c) 2020
 Desc: command line tool to generate API module boilerplate
 Created:  5/11/2020, 11:22:56 PM
-Modified: 5/12/2020, 4:27:51 AM
+Modified: 5/12/2020, 12:10:51 PM
 */
 
 const argv = require('yargs')
@@ -21,7 +21,9 @@ const execa = require('execa');
 const Listr = require('listr');
 const { Observable } = require('rxjs');
 
-var dir = path.join(__dirname, `src/api/${argv.g}`);
+var workingDir = path.basename(process.cwd() + '/src');
+var dir = path.join(workingDir, `api/${argv.g}`);
+
 var files = [
   `${argv.g}.routes.ts`,
   `${argv.g}.model.ts`,
@@ -37,12 +39,12 @@ const tasks = new Listr([
         {
           title: 'Create directory',
           task: async () => {
-            if (fs.existsSync('src/api')) {
-              await execa('mkdir', [argv.g]).catch((err) => {
+            if (fs.existsSync(workingDir + '/api')) {
+              await execa('mkdir', [`${workingDir}/api/${argv.g}`]).catch((err) => {
                 throw new Error(err);
               });
             } else {
-              await execa('mkdir', ['src/api']).catch((err) => {
+              await execa('mkdir', [`${workingDir}/api`]).catch((err) => {
                 throw new Error(err);
               });
               await execa('mkdir', [dir]).catch((err) => {
@@ -67,7 +69,7 @@ const tasks = new Listr([
                 await execa('touch', [`${dir}/${files[1]}`]).catch((err) => {
                   throw new Error(err);
                 });
-              }, 2000);
+              }, 1000);
 
               // controller
               setTimeout(async () => {
@@ -75,7 +77,7 @@ const tasks = new Listr([
                 await execa('touch', [`${dir}/${files[2]}`]).catch((err) => {
                   throw new Error(err);
                 });
-              }, 4000);
+              }, 2000);
 
               // service
               setTimeout(async () => {
@@ -83,11 +85,11 @@ const tasks = new Listr([
                 await execa('touch', [`${dir}/${files[3]}`]).catch((err) => {
                   throw new Error(err);
                 });
-              }, 6000);
+              }, 3000);
 
               setTimeout(() => {
                 observer.complete();
-              }, 8000);
+              }, 4000);
             }),
         },
       ]);
