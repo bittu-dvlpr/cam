@@ -3,7 +3,7 @@ Author: Bittu Patel (b2@skaratechnologies.com)
 cli.js (c) 2020
 Desc: command line tool to generate API module boilerplate
 Created:  5/11/2020, 11:22:56 PM
-Modified: 5/12/2020, 12:10:51 PM
+Modified: 5/12/2020, 11:30:53 PM
 */
 
 const argv = require('yargs')
@@ -29,6 +29,7 @@ var files = [
   `${argv.g}.model.ts`,
   `${argv.g}.controller.ts`,
   `${argv.g}.service.ts`,
+  `${argv.g}.validator.ts`,
 ];
 
 const tasks = new Listr([
@@ -87,9 +88,17 @@ const tasks = new Listr([
                 });
               }, 3000);
 
+              // validator
+              setTimeout(async () => {
+                observer.next(files[4] + ' created');
+                await execa('touch', [`${dir}/${files[4]}`]).catch((err) => {
+                  throw new Error(err);
+                });
+              }, 4000);
+
               setTimeout(() => {
                 observer.complete();
-              }, 4000);
+              }, 5000);
             }),
         },
       ]);
