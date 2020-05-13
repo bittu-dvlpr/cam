@@ -7,7 +7,7 @@ CAM is a command line tool to generate API module boilerplate.
 Use the package manager [npm](https://pip.pypa.io/en/stable/) to install CAM.
 
 ```bash
-npm install cam
+npm install @developerb2/cam -g
 ```
 
 ## Usage
