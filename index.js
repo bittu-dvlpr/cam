@@ -8,13 +8,19 @@ Modified: 5/13/2020, 12:21:07 AM
 
 const argv = require('yargs')
   .usage('Usage: $0 [options]')
-  .alias('g', 'generate')
-  .nargs('g', 1)
-  .describe('g', 'Generate new API module')
+  .option('generate', {
+    alias: 'g',
+    type: 'string',
+    description: 'Generate new API module'
+  })
+  .option('folder', {
+    alias: 'f',
+    type: 'string',
+    description: 'Define parent folder'
+  })
   .demandOption(['g'])
-  .help('h')
-  .alias('h', 'help')
-  .epilog('Handcrafted by B2 with love.').argv;
+  .help()
+  .epilog('Handcrafted by DeveloperB2 with love.').argv;
 const path = require('path');
 const fs = require('fs');
 const execa = require('execa');
@@ -23,7 +29,7 @@ const { Observable } = require('rxjs');
 const delay = require('delay');
 
 var workingDir = path.basename(process.cwd() + '/src');
-var dir = path.join(workingDir, `api/${argv.g}`);
+var dir = path.join(workingDir, argv.f ? `api/${argv.f}/${argv.g}` : `api/${argv.g}`);
 
 var files = [
   `${argv.g}.routes.ts`,
