@@ -48,9 +48,15 @@ const tasks = new Listr([
           title: 'Create directory',
           task: async () => {
             if (fs.existsSync(workingDir + '/api')) {
-              await execa('mkdir', [`${workingDir}/api/${argv.g}`]).catch((err) => {
-                throw new Error(err);
-              });
+              if (argv.f) {
+                await execa('mkdir', [`${workingDir}/api/${argv.f}/${argv.g}`]).catch((err) => {
+                  throw new Error(err);
+                });
+              } else {
+                await execa('mkdir', [`${workingDir}/api/${argv.g}`]).catch((err) => {
+                  throw new Error(err);
+                });
+              }
             } else {
               await execa('mkdir', [`${workingDir}/api`]).catch((err) => {
                 throw new Error(err);
